@@ -1,5 +1,10 @@
 {% extends '_base.html' %}
 
+{% block title %}Home Page{% endblock title %}
+
 {% block content %}
-<h1>Testing</h1>
+<h1>Home page</h1>
+{% if short_form %}
+  <h2><a href="{% url 'visit' short_form %}"  >{{short_form}}</a></h2>
+{% endif %}
 {% endblock content %}
