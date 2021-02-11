@@ -1,13 +1,17 @@
-from django.shortcuts import render, redirect
 import uuid
-from django.views.generic import TemplateView, CreateView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView
+
 from .models import Url
 
 class HomePageView(TemplateView):
     template_name = 'home.html'
 
-class CreateUrlView(TemplateView):
+class CreateUrlView(CreateView):
+    model = Url
     template_name = 'createurl.html'
+    fields = ['url']
 
 def saveUrl(request):
     if request.method == 'POST':
