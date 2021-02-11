@@ -6,6 +6,6 @@
 <form action="{% url 'save_url' %}" method="post">
   {% csrf_token %}
   <input type="text" name="url" id="url" placeholder="enter url....">
-  <input type="submit" value="Shorten URL">
+  <input type="submit" class='btn btn-success' value="Shorten URL">
 </form>
 {% endblock content %}

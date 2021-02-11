@@ -19,6 +19,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # Local
+    # User Management
+    path('accounts/', include('allauth.urls')),
+
+    # Local apps
     path('', include('shortener.urls')),
 ]
