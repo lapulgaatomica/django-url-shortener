@@ -64,3 +64,13 @@ class SaveUrlTest(TestCase):
 
     def test_save_url_page_contains_correct_html(self):
         self.assertContains(self.response, 'visit')
+
+# class VisitTest(TestCase):
+#     def setUp(self):
+#         self.response = self.client.post(reverse('save_url'), {
+#             'url': 'google.com'
+#         })
+#
+#     def test_short_form_in_response(self):
+#         self.uuid = self.response.content
+#         print(self.uuid)
