@@ -17,6 +17,10 @@ class CreateUrlView(CreateView):
 def saveUrl(request):
     if request.method == 'POST':
         url = request.POST.get('url')
+        if url.startswith('https://'):
+            url = url.lstrip('https://')
+        elif url.startswith('http://'):
+            url = url.lstrip('http://')
         short_form = str(uuid.uuid4())[:5]
         new_url = Url(url=url,
          short_form=short_form,
