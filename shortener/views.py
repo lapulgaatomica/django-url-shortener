@@ -17,7 +17,7 @@ def saveUrl(request):
     if request.method == 'POST':
         url = request.POST.get('url')
         short_form = str(uuid.uuid4())[:5]
-        new_url = Url(url=url, short_form=short_form)
+        new_url = Url(url=url, short_form=short_form, creator=request.user)
         new_url.save()
         return render(request, 'home.html', {'short_form': short_form})
 
