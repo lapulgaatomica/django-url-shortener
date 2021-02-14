@@ -1,3 +1,4 @@
+import re
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse, resolve
 from .views import HomePageView, CreateUrlView
@@ -50,27 +51,24 @@ class CreateUrlTest(TestCase):
             CreateUrlView.as_view().__name__
         )
 
-class SaveUrlTest(TestCase):
+class SaveAndVisitUrlTest(TestCase):
     def setUp(self):
-        self.response = self.client.post(reverse('save_url'), {
+        self.first_response = self.client.post(reverse('save_url'), {
             'url': 'google.com'
         })
+        first_response_content = str(self.first_response.content)
+        first_response_visit_link = re.findall('visit/\w+', first_response_content)[0]
+        self.uuid = first_response_visit_link.lstrip('visit/')
+        self.response = self.client.get('/visit/'+self.uuid)
 
     def test_create_url_view_after_url_is_submitted(self):
-        self.assertEqual(self.response.status_code, 200)
+        self.assertEqual(self.first_response.status_code, 200)
 
     def test_save_url_template(self):
-        self.assertTemplateUsed(self.response, 'home.html')
+        self.assertTemplateUsed(self.first_response, 'home.html')
 
     def test_save_url_page_contains_correct_html(self):
-        self.assertContains(self.response, 'visit')
+        self.assertContains(self.first_response, 'visit')
 
-# class VisitTest(TestCase):
-#     def setUp(self):
-#         self.response = self.client.post(reverse('save_url'), {
-#             'url': 'google.com'
-#         })
-#
-#     def test_short_form_in_response(self):
-#         self.uuid = self.response.content
-#         print(self.uuid)
+    def test_redirect(self):
+        self.assertRedirects(self.response, 'https://google.com', fetch_redirect_response=False)

@@ -21,11 +21,12 @@ def saveUrl(request):
             url = url.lstrip('https://')
         elif url.startswith('http://'):
             url = url.lstrip('http://')
+
         short_form = str(uuid.uuid4())[:5]
         new_url = Url(url=url,
          short_form=short_form,
-         creator=None if isinstance(request.user, AnonymousUser) else request.user)
-        print(request.user)
+         creator=None if isinstance(request.user, AnonymousUser) else request.user
+        )
         new_url.save()
         return render(request, 'home.html', {'short_form': short_form})
 
