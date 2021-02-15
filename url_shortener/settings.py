@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Third-party
     'allauth',
     'allauth.account',
+    'crispy_forms',
 
     # Local
     'users.apps.UsersConfig',
@@ -153,3 +154,4 @@ AUTHENTICATION_BACKENDS = (
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_EMAIL_REQUIRED = False
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

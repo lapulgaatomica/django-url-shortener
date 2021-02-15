@@ -36,6 +36,11 @@ header .title{
   font-weight: bold;
   padding: 1em;
 }
+#logo{
+  font-size: 150%;
+  font-style: italic;
+  font-weight: bold;
+}
 
 main{
   margin: auto;
