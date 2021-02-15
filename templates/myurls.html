@@ -1,0 +1,12 @@
+{% extends '_base.html'%}
+
+{% block title %}My URLS{% endblock title %}
+
+{% block content %}
+<h1>My Urls</h1>
+<ul class="list-group">
+  {% for my_url in my_urls%}
+    <li class="list-group-item"><a href="{% url 'visit' my_url.short_form %}">{{ my_url.url}}</a></li>
+  {% endfor %}
+<ul class="list-group">
+{% endblock content %}

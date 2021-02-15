@@ -1,8 +1,10 @@
 import uuid
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.models import AnonymousUser
+from .models import Url
 
 from .models import Url
 
@@ -13,6 +15,15 @@ class CreateUrlView(CreateView):
     model = Url
     template_name = 'createurl.html'
     fields = ['url']
+
+class MyUrlView(LoginRequiredMixin, ListView):
+    context_object_name = 'my_urls'
+    # queryset = Url.objects.filter(creator=request.user)
+    template_name = 'myurls.html'
+    login_url = 'account_login'
+    def get_queryset(self):
+        return Url.objects.filter(creator=self.request.user)
+
 
 def saveUrl(request):
     if request.method == 'POST':
