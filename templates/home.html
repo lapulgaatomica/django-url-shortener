@@ -5,6 +5,6 @@
 {% block content %}
 <h1>Home page</h1>
 {% if short_form %}
-  <h2>This is the url of the just shortened address: <a href="{% url 'visit' short_form %}"  >{{short_form}}</a></h2>
+  <h2>This is the URL of the just shortened address: <a href="{% url 'visit' short_form %}"  >{{short_form}}</a></h2>
 {% endif %}
 {% endblock content %}
